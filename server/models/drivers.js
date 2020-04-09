@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     phone_number: DataTypes.STRING
   }, {});
   drivers.associate = function(models) {
-    // associations can be defined here
+    drivers.hasMany(models.orders, {as: 'driver'})
   };
   return drivers;
 };
