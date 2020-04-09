@@ -1,18 +1,69 @@
-function getJodoh(request, response) {
-    response.send('Cari jodoh dengan http ' + request.method)
+const model = require('../models')
+
+function createUser(req, res) {
+    model.customers.create({
+        name: req.body.name,
+        label: req.body.label,
+        picture: req.body.picture,
+        email: req.body.email,
+        phone: req.body.phone,
+        website: req.body.website,
+        summary: req.body.summary
+    })
+    .then( function(result) {
+        res.json(result)
+    })
+    .catch( function(error) {
+        res.json({error: error})
+    })
 }
-function setJodoh(request, response) {
-    response.send('Cari jodoh dengan http ' + request.method)
+function readUser(req, res) {
+    model.customers.findAll()
+    .then( function(result) {
+        res.json(result)
+    })
+    .catch( function(error) {
+        res.json({error: error})
+    })
 }
-function updateJodoh(request, response) {
-    response.send('Cari jodoh dengan http ' + request.method)
+function updateUser(req, res) {
+    model.customers.update({
+        name: req.body.name,
+        label: req.body.label,
+        picture: req.body.picture,
+        email: req.body.email,
+        phone: req.body.phone,
+        website: req.body.website,
+        summary: req.body.summary
+    }, {
+        where: {
+          id: req.params.id
+        }
+    })
+    .then( function(result) {
+        res.json(result)
+    })
+    .catch( function(error) {
+        res.json({error: error})
+    })
 }
-function deleteJodoh(request, response) {
-    response.send('Cari jodoh dengan http ' + request.method)
+
+function deleteUser(req, res) {
+    model.customers.destroy({
+        where: {
+          id: req.params.id
+        }
+    })
+    .then( function(result) {
+        res.json(result)
+    })
+    .catch( function(error) {
+        res.json({error: error})
+    })
 }
 module.exports = {
-    getJodoh,
-    setJodoh,
-    updateJodoh,
-    deleteJodoh,
+    createUser,
+    readUser,
+    updateUser,
+    deleteUser,
 }
