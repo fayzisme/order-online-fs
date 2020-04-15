@@ -6,8 +6,8 @@ module.exports = (sequelize, DataTypes) => {
     quantity: DataTypes.INTEGER
   }, {});
   order_items.associate = function(models) {
-    order_items.belongsTo(models.orders, {foreignKey: 'order_id', as: 'order'})
-    order_items.belongsTo(models.products, {foreignKey: 'product_id', as: 'product'})
+    order_items.belongsTo(models.orders, {foreignKey: 'order_id', onDelete: 'CASCADE'})
+    order_items.belongsTo(models.products, {foreignKey: 'product_id', onDelete: 'CASCADE'})
   };
   return order_items;
 };

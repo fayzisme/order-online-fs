@@ -7,7 +7,10 @@ module.exports = (sequelize, DataTypes) => {
     phone_number: DataTypes.STRING
   }, {});
   customers.associate = function(models) {
-    customers.hasMany(models.orders, {as: 'customer'})
+    customers.hasMany(models.orders, {
+      foreignKey: 'user_id',
+			onDelete: 'CASCADE'
+    })
   };
   return customers;
 };

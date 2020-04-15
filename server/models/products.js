@@ -5,7 +5,10 @@ module.exports = (sequelize, DataTypes) => {
     price: DataTypes.INTEGER
   }, {});
   products.associate = function(models) {
-    // associations can be defined here
+    products.hasMany(models.order_items, {
+			foreignKey: 'product_id',
+			onDelete: 'CASCADE'
+		});
   };
   return products;
 };
